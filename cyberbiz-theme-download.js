@@ -95,6 +95,8 @@
                         const zipName = "cyberbiz-theme.zip";
 
                         saveAs(content, zipName);
+
+                        console.log("Download completed: there are " + filePaths.length + " files.");
                     });
                 }
             });
