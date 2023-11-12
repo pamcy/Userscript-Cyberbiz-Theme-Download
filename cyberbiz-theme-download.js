@@ -1,12 +1,11 @@
 // ==UserScript==
 // @name         Cyberbiz theme files download
 // @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
+// @version      1.0
+// @description  Download all files from the Cyberbiz theme to your local machine
 // @author       Pamcy
-// @match        https://creerlab.cyberbiz.co/admin/themes/101041/assets
+// @match        https://creerlab.cyberbiz.co/admin/themes/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=cyberbiz.co
-// @grant        GM_download
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.0.2/jszip-utils.min.js
 // @require      https://fastcdn.org/FileSaver.js/1.1.20151003/FileSaver.min.js
@@ -30,11 +29,11 @@
 
     let filePaths = [];
 
-    function createBtn() {
+    function createDownloadBtn() {
         const sidebar = document.getElementById("sidebar");
         const button = document.createElement("button");
 
-        button.innerText = "Save Theme Files";
+        button.innerText = "Download Theme Files";
         button.style.color = '#f4f3c5';
         button.style.backgroundColor = '#3b40ee';
         button.style.float = 'right';
@@ -42,13 +41,14 @@
         button.style.cursor = 'pointer';
 
         button.onclick = async () => {
+            await generateFileUrls();
             await downloadAll();
         }
 
         if(sidebar) {
-            console.log("Button created!");
             sidebar.appendChild(button);
-            generateFileUrls();
+
+            console.log("Button created!");
         } else {
             alert("Something wrong when loading the button!")
         }
@@ -103,7 +103,7 @@
         });
     }
 
-    createBtn();
+    createDownloadBtn();
 
     console.log("End script");
 })();
