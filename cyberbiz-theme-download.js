@@ -8,7 +8,8 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=cyberbiz.co
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.0.2/jszip-utils.min.js
-// @require      https://fastcdn.org/FileSaver.js/1.1.20151003/FileSaver.min.js
+// @updateURL    https://raw.githubusercontent.com/pamcy/Userscript-Cyberbiz-Theme-Download/main/cyberbiz-theme-download.js
+// @license      MIT
 // ==/UserScript==
 
 // Reference: https://gist.github.com/PoomSmart/e7d1b5a8d56b5b78a24c2ae8b28a3e09
