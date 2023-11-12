@@ -19,6 +19,7 @@
 
     console.log("Begin script");
 
+    const button = document.createElement("button");
     const parent = document.querySelector("#theme-editor-sidebar-top");
     const categories = {
         整體配置: "layout",
@@ -29,25 +30,30 @@
     };
 
     let filePaths = [];
+    let isDownloaded = false;
 
     function createDownloadBtn() {
         const sidebar = document.getElementById("sidebar");
-        const button = document.createElement("button");
 
         button.innerText = "Download Theme Files";
-        button.style.color = '#f4f3c5';
-        button.style.backgroundColor = '#3b40ee';
-        button.style.float = 'right';
-        button.style.marginRight = '15px';
-        button.style.cursor = 'pointer';
+        button.style.color = "#f4f3c5";
+        button.style.backgroundColor = "#3b40ee";
+        button.style.float = "right";
+        button.style.marginRight = "15px";
+        button.style.cursor = "pointer";
 
         button.onclick = async () => {
+            button.innerText = "Downloading...";
+            button.disabled = true;
+            button.style.backgroundColor = "#858596";
+            button.style.cursor = "not-allowed";
+
             const number  = await getThemeNumber();
             await generateFileUrls(number);
             await downloadAll();
         }
 
-        if(sidebar) {
+        if (sidebar) {
             sidebar.appendChild(button);
 
             console.log("Button created!");
@@ -112,6 +118,15 @@
                         const zipName = "cyberbiz-theme.zip";
 
                         saveAs(content, zipName);
+
+                        isDownloaded = true;
+
+                        if (isDownloaded) {
+                            button.innerText = "Download Theme Files";
+                            button.disabled = false;
+                            button.style.backgroundColor = "#3b40ee";
+                            button.style.cursor = "pointer";
+                        }
 
                         console.log("Download completed: there are " + filePaths.length + " files.");
                         console.log("End script");
