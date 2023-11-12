@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Cyberbiz theme files download
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.0.1
 // @description  Download all files from the Cyberbiz theme to your local machine
 // @author       Pamcy
 // @match        https://creerlab.cyberbiz.co/admin/themes/*
