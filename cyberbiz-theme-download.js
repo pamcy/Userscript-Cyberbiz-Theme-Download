@@ -42,7 +42,8 @@
         button.style.cursor = 'pointer';
 
         button.onclick = async () => {
-            await generateFileUrls();
+            const number  = await getThemeNumber();
+            await generateFileUrls(number);
             await downloadAll();
         }
 
@@ -55,11 +56,26 @@
         }
     }
 
-    function generateFileUrls() {
+    function getThemeNumber() {
+        const match = window.location.pathname.match(/\/(\d+)\//);
+        const themeNumber = match ? match[1] : null;
+
+        return themeNumber;
+    }
+
+    function generateFileUrls(themeNumber) {
+        if (!themeNumber) {
+            alert("Theme number is not found!");
+
+            return;
+        }
+
+        console.log('Theme number: ' + themeNumber);
+
         parent.querySelectorAll(".accordion-group").forEach((accordion) => {
             const title = accordion.querySelector(".accordion-toggle").textContent.trim();
             const prefix =
-                  "https://creerlab.cyberbiz.co/admin/themes/101041/assets/master?key=";
+                  `https://creerlab.cyberbiz.co/admin/themes/${themeNumber}/assets/master?key=`;
             const category = categories[title];
             const urls = Array.from(accordion.querySelectorAll(".file")).map(
                 (item) => prefix + category + "/" + item.textContent.trim()
@@ -98,6 +114,7 @@
                         saveAs(content, zipName);
 
                         console.log("Download completed: there are " + filePaths.length + " files.");
+                        console.log("End script");
                     });
                 }
             });
@@ -105,6 +122,4 @@
     }
 
     createDownloadBtn();
-
-    console.log("End script");
 })();
